@@ -15,6 +15,7 @@ public class AppTest
      *
      * @param testName name of the test case
      */
+	//added a new comment
     public AppTest( String testName )
     {
         super( testName );
