@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="InetBankingV1">
+
+
+
+	<test name="BankingApp Test">
+
+		<classes>
+			<class name="org.persistent.test.test_git.LoginTest" />
+			<!-- class name="org.persistent.test.test_git.TestWebDriverManagerExtentReport" / --> <!-- This is working Extent report using ITestResult and @AfterMethod annotation  -->
+			<!-- class name="org.persistent.test.test_git.TestWebDriverManagerReporting" /-->
+		</classes>
+
+	</test>
+
+</suite>
