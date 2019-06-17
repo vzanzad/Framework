@@ -17,6 +17,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+import getters.BaseGetClass;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utility.Utils;
 
@@ -75,7 +76,8 @@ public class TestWebDriverManager extends BaseClass{
 		if(ITestResult.FAILURE==result.getStatus())
 		{
 			try {
-				String screenshotName=result.getName()+"_"+getBrowserName()+"_"+Utils.getCurrentSystemDate()+".png";
+				//String screenshotName=result.getName()+"_"+getBrowserName()+"_"+Utils.getCurrentSystemDate()+".png";
+				String screenshotName=result.getName()+"_"+BaseGetClass.getBrowserName(iTestCaseRowNumber)+"_"+Utils.getCurrentSystemDate()+".png";
 				//String screenshotName=result.getName()+".png";
 				String temp=Utils.captureScreenshot(driver,screenshotName);
 				logger.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());

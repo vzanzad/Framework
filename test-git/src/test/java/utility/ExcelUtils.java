@@ -55,6 +55,7 @@ public class ExcelUtils {
 		row=ws.getRow(rownum);
 		cell=row.getCell(colnum);
 		String data;
+		//cell.getStringCellValue();
 		try 
 		{
 			DataFormatter formatter = new DataFormatter();

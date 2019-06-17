@@ -8,9 +8,12 @@
 	<test name="BankingApp Test">
 
 		<classes>
-			<class name="org.persistent.test.test_git.LoginTest" />
+			<!-- class name="org.persistent.test.test_git.TestFirefox"/-->
+			<class name="org.persistent.test.test_git.MultiURLTest"/>
+			<!-- class name="org.persistent.test.test_git.LoginTest" /--> <!--Working E2E  -->
 			<!-- class name="org.persistent.test.test_git.TestWebDriverManagerExtentReport" / --> <!-- This is working Extent report using ITestResult and @AfterMethod annotation  -->
 			<!-- class name="org.persistent.test.test_git.TestWebDriverManagerReporting" /-->
+			<!-- class name="org.persistent.test.test_git.GoogleNew" /--> <!--This works Extent Report using ReportingNew class and ITestListener interface  -->
 		</classes>
 
 	</test>

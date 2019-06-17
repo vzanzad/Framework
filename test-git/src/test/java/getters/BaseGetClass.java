@@ -17,5 +17,11 @@ public class BaseGetClass {
 		
 		ExcelUtils.setCellData(Constant.Path_TestData, Constant.File_TestData, testCaseRowNum, Constant.Col_Result, result);
 	}
+	
+	public static String getBrowserName(int testCaseRowNum) throws Exception
+	{
+		String browserName=ExcelUtils.getCellData(Constant.Path_TestData, Constant.File_TestData, testCaseRowNum, Constant.Col_BrowserName);
+		return browserName;
+	}
 
 }

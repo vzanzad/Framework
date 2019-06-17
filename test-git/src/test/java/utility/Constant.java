@@ -13,4 +13,5 @@ public class Constant {
 	 public static final int Col_Username = 1; 
 	 public static final int Col_Password = 2; 
 	 public static final int Col_Result = 3; 
+	 public static final int Col_BrowserName=4;
 }

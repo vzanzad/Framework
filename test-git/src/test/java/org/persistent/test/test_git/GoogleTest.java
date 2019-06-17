@@ -12,7 +12,7 @@ public class GoogleTest extends BaseClass{
 	@BeforeMethod
 	public void setUp()
 	{
-		setBrowserName();
+		//setBrowserName();
 		driver=BrowserFactory.startApplication(driver, browserName, appURL);
 	}
 	

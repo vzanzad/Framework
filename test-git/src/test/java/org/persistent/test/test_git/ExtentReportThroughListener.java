@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
 
+import getters.BaseGetClass;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utility.Utils;
 
@@ -45,7 +46,7 @@ public class ExtentReportThroughListener extends BaseClass{
 		if(ITestResult.FAILURE==result.getStatus())
 		{
 			try {
-				String screenshotName=result.getName()+"_"+getBrowserName()+"_"+Utils.getCurrentSystemDate()+".png";
+				String screenshotName=result.getName()+"_"+BaseGetClass.getBrowserName(iTestCaseRowNumber)+"_"+Utils.getCurrentSystemDate()+".png";
 				String temp=Utils.captureScreenshot(driver,screenshotName);
 				Utils.setCurrentScreenshot(temp);
 			} catch (Exception e) {

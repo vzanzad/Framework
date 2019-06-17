@@ -23,6 +23,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+import getters.BaseGetClass;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utility.Utils;
 
@@ -123,7 +124,8 @@ public class TestWebDriverManagerExtentReport extends BaseClass{
 			logger=extent.createTest(result.getName()); // create new entry in th report
 			logger.log(Status.FAIL,MarkupHelper.createLabel(result.getName(),ExtentColor.RED));
 			try {
-				String screenshotName=result.getName()+"_"+getBrowserName()+"_"+Utils.getCurrentSystemDate()+".png";
+				//String screenshotName=result.getName()+"_"+getBrowserName()+"_"+Utils.getCurrentSystemDate()+".png";
+				String screenshotName=result.getName()+"_"+BaseGetClass.getBrowserName(iTestCaseRowNumber)+"_"+Utils.getCurrentSystemDate()+".png";
 				//String screenshotName=result.getName()+".png";
 				String temp=Utils.captureScreenshot(driver,screenshotName);
 				logger.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());

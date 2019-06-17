@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -22,6 +23,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+import getters.BaseGetClass;
 import getters.GetLogin;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.LoginPage;
@@ -29,6 +31,7 @@ import utility.BrowserFactory;
 import utility.Constant;
 import utility.ExcelUtils;
 import utility.Utils;
+import verification.Login;
 
 public class LoginTest extends BaseClass{
 	
@@ -61,6 +64,8 @@ public class LoginTest extends BaseClass{
 		
 		sTestCaseName=method.getName();
 		iTestCaseRowNumber=ExcelUtils.getTestCaseRowNumber(sTestCaseName, Constant.Col_TestCaseName);
+		browserName=BaseGetClass.getBrowserName(iTestCaseRowNumber);
+		bResult=true;
 		//rowCount=ExcelUtils.getRowCount(Constant.Path_TestData, Constant.File_TestData);
 	}
 	
@@ -70,7 +75,7 @@ public class LoginTest extends BaseClass{
 	 
 	// This will launch browser and specific url 
 	//WebDriver driver=BrowserFactory.startBrowser("firefox", "http://demosite.center/wordpress/wp-login.php");
-	driver=BrowserFactory.startApplication(driver, "chrome", appURL);
+	driver=BrowserFactory.startApplication(driver, browserName, appURL);
 	 
 	// Created Page Object using Page Factory
 	String testCaseName=sTestCaseName;
@@ -82,6 +87,8 @@ public class LoginTest extends BaseClass{
 	 
 	// Call the method
 	login_page.login(uname, pass);
+	Login.verify();
+	Assert.assertTrue(bResult);
 	}
 	
 	
@@ -89,12 +96,21 @@ public class LoginTest extends BaseClass{
 	public void checkValidUserUDF() throws Exception 
 	{
 	  
-	  driver=BrowserFactory.startApplication(driver, "chrome", appURL);
+	  try {
+		driver=BrowserFactory.startApplication(driver, browserName, appURL);
+		  
+		  LoginPage login_page=PageFactory.initElements(driver, LoginPage.class);
+		  
+		  //Call the method 
+		  login_page.login(GetLogin.getUsername(iTestCaseRowNumber), GetLogin.getPassword(iTestCaseRowNumber)); 
+		  Login.verify();
+		  Assert.assertTrue(bResult);
+	} catch (Exception e) {
+		//e.printStackTrace();
+		throw e;
+	}
 	  
-	  LoginPage login_page=PageFactory.initElements(driver, LoginPage.class);
 	  
-	  //Call the method 
-	  login_page.login(GetLogin.getUsername(iTestCaseRowNumber), GetLogin.getPassword(iTestCaseRowNumber)); 
 	  }
 	 
 	
@@ -134,8 +150,8 @@ public class LoginTest extends BaseClass{
 			logger.log(Status.FAIL,MarkupHelper.createLabel(result.getName(),ExtentColor.RED));
 			testResult="Fail";
 			try {
-				String screenshotName=result.getName()+"_"+getBrowserName()+"_"+Utils.getCurrentSystemDate()+".png";
-				//String screenshotName=result.getName()+".png";
+				//String screenshotName=result.getName()+"_"+getBrowserName()+"_"+Utils.getCurrentSystemDate()+".png";
+				String screenshotName=result.getName()+"_"+browserName+"_"+Utils.getCurrentSystemDate()+".png";
 				String temp=Utils.captureScreenshot(driver,screenshotName);
 				logger.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
 			} catch (Exception e) {
@@ -165,7 +181,7 @@ public class LoginTest extends BaseClass{
 		extent.flush();
 		
 		if(driver!=null)
-		{
+		{ 
 			driver.quit();
 		}
 	}
